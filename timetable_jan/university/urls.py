@@ -19,4 +19,5 @@ urlpatterns = patterns('',
     (r'autocomplete/extra-courses/$', ExtraCoursesAutocompleteView.as_view()),
     (r'autocomplete/test/$', TemplateView.as_view(template_name='autocomplete_test.html')),
     (r'create-timetable/$', UnifiedTimetableProcessView.as_view(template_name='create_timetable.html')),
+    url(r'^api/', include('timetable_jan.university.api.urls')),
 )
