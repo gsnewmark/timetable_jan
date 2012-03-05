@@ -3,6 +3,7 @@ from tastypie import fields
 from tastypie.api import Api
 from tastypie.resources import ModelResource
 from tastypie.utils import trailing_slash
+
 from timetable_jan.university.models import *
 
 
@@ -54,8 +55,8 @@ class ModelResource(ModelResource):
                 # TODO add link to child resources
                 #bundle.data[field.attribute + u'_uri'] = 
         return bundle
-        
-        
+
+            
 class UniversityResource(ModelResource):
     terms = fields.ToManyField(
         'timetable_jan.university.api.AcademicTermResource',
@@ -115,7 +116,12 @@ class RoomResource(ModelResource):
 
         filtering = {
             'building': ('exact',),
+            'number': ('startswith',),
             }
+
+    def dehydrate(self, bundle):
+        bundle.data['string'] = bundle.obj
+        return bundle
 
 
 class FacultyResource(ModelResource):
